@@ -1,6 +1,6 @@
 // Establish version and status
 def performingRelease = project.hasProperty('release') && Boolean.parseBoolean(project.release)
-def releaseVersion = '1.1.7'
+def releaseVersion = '1.0.8'
 def versionPostfix = performingRelease?'':'-SNAPSHOT'
 version = "${releaseVersion}${versionPostfix}"
 status = performingRelease?'release':'snapshot'
@@ -35,7 +35,7 @@ subprojects
 
     dependencies
     {
-        compile('org.apache.zookeeper:zookeeper:3.4.3')
+        compile('org.apache.zookeeper:zookeeper:3.3.4')
         {
             exclude group: 'com.sun.jmx', module: 'jmxri'
             exclude group: 'com.sun.jdmk', module: 'jmxtools'
@@ -45,6 +45,7 @@ subprojects
             exclude group: 'junit', module: 'junit'
         }
         compile     'com.google.guava:guava:11.0.1'
+        compile     'org.slf4j:slf4j-api:1.6.3'
         testCompile 'org.testng:testng:6.1.1'
         testCompile 'log4j:log4j:1.2.16'
     }
@@ -135,7 +136,6 @@ project(':curator-client')
 {
     dependencies
     {
-        compile 'org.slf4j:slf4j-api:1.6.3'
         // Original has commons-logging
         testCompile 'org.mockito:mockito-core:1.8.5'
         testCompile project(':curator-test')
